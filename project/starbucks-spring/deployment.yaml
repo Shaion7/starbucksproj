@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springstarbucks-deployment
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      name: springstarbucks
+  replicas: 3 # tells deployment to run 2 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      # unlike pod.yaml, the name is not included in the meta data as a unique name is
+      # generated from the deployment name
+      labels:
+        name: springstarbucks
+    spec:
+      containers:
+      - name: springstarbucks
+        image: shaion7/springstarbucks:v2.4
+        ports:
+        - containerPort: 8081
+
